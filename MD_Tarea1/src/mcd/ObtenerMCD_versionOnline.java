@@ -7,8 +7,8 @@ public class ObtenerMCD_versionOnline {
 	private static Integer contador = 0;
 	
 	public static void main(String[] args) {
-        Integer a = 37854;
-        Integer b = 1053;
+        Integer a = 6;
+        Integer b = 3;
         System.out.println("Vamos a calcular el máximo común divisor de " + a + " y " + b);
         System.out.println("");
         ArrayList<ArrayList<Integer>> resultados = new ArrayList<ArrayList<Integer>>();
@@ -41,12 +41,16 @@ public class ObtenerMCD_versionOnline {
         	System.out.println("");
         	System.out.println("Ahora se calculará la igualdad de Bezout");
         	System.out.println("");
-        	contador = resultados.size()-2;
-        	igualdadBezout(resultados, b);
+        	if(resultados.size()>2) {
+        		contador = resultados.size()-2;
+        		igualdadBezout(resultados);
+        	} else {
+        		System.out.println(b + " = " + originalA + " * 1 - " + originalB + " * 1");
+        	}
         }
     }
     
-    public static void igualdadBezout(ArrayList<ArrayList<Integer>> resultados, Integer mcd) {
+    public static void igualdadBezout(ArrayList<ArrayList<Integer>> resultados) {
     	ArrayList<Integer> res = resultados.get(resultados.size()-1);
     	ArrayList<Integer> linea = resultados.get(contador);
     	 
@@ -63,13 +67,13 @@ public class ObtenerMCD_versionOnline {
     	res.set(1, b);
     	res.set(2, c);
     	res.set(3, d);
-    	
-    	System.out.println(res.get(4) + " = " + res.get(0) + " * " + res.get(1) + " - " + res.get(2) + " * " + res.get(3));
-    	System.out.println("");
 
     	contador--;
     	if(contador>=0) {
-    		igualdadBezout(resultados, mcd);
+    		igualdadBezout(resultados);
+    	} else {    		
+    		System.out.println(res.get(4) + " = " + res.get(0) + " * " + res.get(1) + " - " + res.get(2) + " * " + res.get(3));
+    		System.out.println("");
     	}
     }
 }
